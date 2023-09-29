@@ -1,6 +1,8 @@
-# Front AppCine
+# Front (appcine)
 
-- [Web4 - 2023](https://github.com/fscheidt/web4-23)
+- [front (svelte)](https://github.com/fscheidt/front)
+- [pycine (fastapi)](https://github.com/fscheidt/pycine)
+- [web4 - 2023](https://github.com/fscheidt/web4-23)
 
 ## Creating a project
 

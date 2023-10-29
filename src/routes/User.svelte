@@ -1,18 +1,22 @@
 <script>
+  import { Input, Label } from "flowbite-svelte";
+
   let resposta = "";
   async function sendForm(e){
       // envia o formulario no formato json
       let formData = new FormData(e.target);
       let data = Object.fromEntries(formData.entries());
-      const res = await fetch('http://localhost:8000/users',{
+      const res = await fetch('http://localhost:8000/user/create',{
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
           },
-          body: JSON.stringify(data)
+          body: {
+            "email": formData[email],
+            "password": formData[password]
+          }
       });
-      const json = await res.json();
-      resposta = JSON.stringify(json);
+      resposta = 'User Created Sucessfully'
   }
   </script>
   
@@ -27,6 +31,8 @@
       <input type="text" name="email" placeholder="Email" required autocomplete="off">
       <input type="text" name="password" placeholder="password" required autocomplete="off">
       <input type="submit" value="add">
+      <Label > Enter Your Name</Label>
+      <Input id='name' type='text' name="name" />
   </form>
   
   <style>

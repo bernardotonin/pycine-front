@@ -1,25 +1,18 @@
 <script>
   export let menu;
+
+  import { Navbar, NavBrand, NavLi, NavUl, NavHamburger } from 'flowbite-svelte';
+
 </script>
 
-<div id="componente-nav">
-  <ul>
-    <li><a href="/" on:click|preventDefault={() => (menu = 1)}>Movies</a></li>
-    <li><a href="/" on:click|preventDefault={() => (menu = 2)}>Artista</a></li>
-    <li><a href="/" on:click|preventDefault={() => (menu = 3)}>Users</a></li>
-  </ul>
-</div>
-
-<style>
-div{
-  background-color: rgb(217, 217, 217);
-}
-ul { 
-  color: navy; 
-  padding: 10px;
-}
-li {
-  display: inline-block;
-  padding-right: 10px;
-}
-</style>
+<Navbar  >
+  <NavBrand href="/">
+    <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Pycine 	&#128293;</span>
+  </NavBrand>
+  <NavHamburger  />
+  <NavUl >
+    <NavLi href="/" on:click={()=> menu=1 }>Movies</NavLi>
+    <NavLi href="/" on:click={()=> menu=2 }>Artist</NavLi>
+    <NavLi href="/" on:click={()=> menu=3 }>Users</NavLi>
+  </NavUl>
+</Navbar>

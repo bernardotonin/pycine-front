@@ -1,6 +1,7 @@
 <script>
-  import { Input, Label, Button, Alert} from "flowbite-svelte";
+  import { Input, Label, Button, Alert, Heading} from "flowbite-svelte";
   import { EnvelopeSolid, LockSolid, ExclamationCircleOutline} from 'flowbite-svelte-icons';
+  import { redirect } from '@sveltejs/kit'
   let resposta = "";
   import { createUser } from "../util/APIService";
 
@@ -11,11 +12,12 @@
       const password = formData.get('password').toString();
       createUser(email, password);
       resposta = 'User created Sucessfully'
+      
   }
 
   </script>
 
-    <h1 class="header">Register</h1>
+    <Heading class='text-center mb-4'>Register</Heading>
 
   
   

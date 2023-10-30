@@ -1,49 +1,61 @@
 <script>
-  import { Input, Label } from "flowbite-svelte";
-
+  import { Input, Label, Button, Alert} from "flowbite-svelte";
+  import { EnvelopeSolid, LockSolid, ExclamationCircleOutline} from 'flowbite-svelte-icons';
   let resposta = "";
+  import { createUser } from "../util/APIService";
+
   async function sendForm(e){
       // envia o formulario no formato json
       let formData = new FormData(e.target);
-      let data = Object.fromEntries(formData.entries());
-      const res = await fetch('http://localhost:8000/user/create',{
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: {
-            "email": formData[email],
-            "password": formData[password]
-          }
-      });
-      resposta = 'User Created Sucessfully'
+      const email = formData.get('email').toString();
+      const password = formData.get('password').toString();
+      createUser(email, password);
+      resposta = 'User created Sucessfully'
   }
+
   </script>
+
+    <h1 class="header">Register</h1>
+
   
-  
-  
-  <h2>New user</h2>
-  
-  <p>{resposta}</p>
   
   <form class="crud" on:submit|preventDefault={sendForm}>
-      <input type="text" name="name" placeholder="User name" required autocomplete="off">
-      <input type="text" name="email" placeholder="Email" required autocomplete="off">
-      <input type="text" name="password" placeholder="password" required autocomplete="off">
-      <input type="submit" value="add">
-      <Label > Enter Your Name</Label>
-      <Input id='name' type='text' name="name" />
+    <div class="inputContainer">
+        <Label for="email" class="block mb-4">Email</Label>
+        <Input id="email" name="email" size="lg"  type="email" placeholder="Please enter your email">
+            <EnvelopeSolid slot="left" class="w-5 h-5 text-gray-500 dark:text-gray-400" />
+        </Input>
+    </div>
+    <div class="inputContainer">
+        <Label for="password" class="block mb-4 mt-4">Password</Label>
+        <Input id="password" name="password" size="lg"  type="password" placeholder="Please enter your password" >
+            <LockSolid slot="left" class="w-5 h-5 text-gray-500 dark:text-gray-400" />
+        </Input>
+    </div>
+    <Button class='mt-5 mb-3' type='submit'>Register</Button>
+    {#if resposta}
+        <Alert color='green'><ExclamationCircleOutline class='inline mr-2'/><span class="font-medium">{resposta}</span></Alert>
+    {/if}
   </form>
   
   <style>
-  form.crud{
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 5px;
-      row-gap: 10px;
-  }
-  .crud input[type=submit]{
-      justify-self: baseline;
-  }
+
+    .header{
+        font-weight: '900';
+        font-size: 48px;
+        text-align: center;
+    }
+    form.crud{
+      width: 500px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 10px;
+      border-width: 1px;
+      border-color: #EB4F27;
+      border-radius: 10px;
+    }
+
+    
+
   </style>
   

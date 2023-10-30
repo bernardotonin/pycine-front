@@ -4,6 +4,7 @@
 	import Artista from "./Artista.svelte"
 	import Nav from "./Nav.svelte"
 	import User from "./User.svelte"
+	import ListUsers from "./ListUsers.svelte";
 </script>
 
 <Nav bind:menu/>
@@ -16,6 +17,6 @@
 	{:else if menu === 3}
 		<User/>
 	{:else}
-		OPTION 4
+		<ListUsers/>
 	{/if}
 </div>

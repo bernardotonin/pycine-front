@@ -1,47 +1,36 @@
 <script>
-  import { Card, Button, Toggle, Spinner } from 'flowbite-svelte';
-  import { HeartOutline } from 'flowbite-svelte-icons'
-  import { getFilmes } from "../util/dataFetch";
-  let promise = getFilmes();
+  import { Card, Button, Spinner } from 'flowbite-svelte';
+  import { HeartOutline, HeartSolid } from 'flowbite-svelte-icons'
+  import { addFavorite, getFilmes } from "../util/APIService";
+  let promise = [];
   const OnClickHandler = () => {
     promise = getFilmes();
   };
-
-  const onClickFavorito = async (title, description, image, id) => {
-	const res = await fetch('http://localhost:8000/users/favorite/add',{
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: {
-			"user_id": id,
-			"title": title,
-			"description": description,
-			"bannerUrl": image
-		  }
-      });
-  }
 </script>
 
 <div id="componente-movie">
 	<div class="button">
 		<Button on:click={()=> OnClickHandler()}>Get Filmes</Button>
 	</div>
-
+<h1 class="title">Movie List</h1>
   {#await promise}
   <div class="spinner">
     <Spinner size={36}/>
 
   </div>
   {:then filmes}
-    <h1 class="title">Movie List</h1>
+    
     {#each filmes as filme}
 	<div class="movielistContainer">
-		<Card img={filme.image} class="mb-4">
+		<Card img={filme.image} size='xs' class='align'>
+		  	
+		  <div class="align">
 		  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{filme.title}</h5>
-		  <Button on:click={()=> onClickFavorito(filme.title, filme.description, filme.image, 1)}>
-			Favorito<HeartOutline class="w-3.5 h-3.5 ml-2 text-white" />
+		  <Button on:click={() => {addFavorite(2, filme.title, filme.description, filme.image)}}>
+			Favorito
+			<HeartOutline class="w-3.5 h-3.5 ml-2 text-white" />
 		  </Button>
+		</div>
 		</Card>
 		
 	  </div>
@@ -65,10 +54,18 @@
 	.title{
 		font-weight: 700;
 		font-size: 36px;
-		margin-left: 850px;
+		text-align: center;
 	
 	}
 	.movielistContainer{
 		margin-left: 750px;
 	}
+
+	.align{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+
 </style>

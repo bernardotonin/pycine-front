@@ -1,7 +1,6 @@
 <script>
   import { Input, Label, Button, Alert, Heading} from "flowbite-svelte";
   import { EnvelopeSolid, LockSolid, ExclamationCircleOutline} from 'flowbite-svelte-icons';
-  import { redirect } from '@sveltejs/kit'
   let resposta = "";
   import { createUser } from "../util/APIService";
 
@@ -24,13 +23,13 @@
   <form class="crud" on:submit|preventDefault={sendForm}>
     <div class="inputContainer">
         <Label for="email" class="block mb-4">Email</Label>
-        <Input id="email" name="email" size="lg"  type="email" placeholder="Please enter your email">
+        <Input required id="email" name="email" size="lg"  type="email" placeholder="Please enter your email">
             <EnvelopeSolid slot="left" class="w-5 h-5 text-gray-500 dark:text-gray-400" />
         </Input>
     </div>
     <div class="inputContainer">
         <Label for="password" class="block mb-4 mt-4">Password</Label>
-        <Input id="password" name="password" size="lg"  type="password" placeholder="Please enter your password" >
+        <Input required id="password" name="password" size="lg"  type="password" placeholder="Please enter your password" >
             <LockSolid slot="left" class="w-5 h-5 text-gray-500 dark:text-gray-400" />
         </Input>
     </div>
@@ -41,12 +40,6 @@
   </form>
   
   <style>
-
-    .header{
-        font-weight: '900';
-        font-size: 48px;
-        text-align: center;
-    }
     form.crud{
       width: 500px;
       margin: 0 auto;

@@ -20,6 +20,15 @@ export const getUsers = async () => {
   }
 }
 
+export const getActor = async (actor_id) => {
+  const res = await fetch(`http://localhost:8080/movie/actor/${actor_id}`);
+  const text = await res.json();
+  if (res.ok) {
+    return text;
+  } else {
+    throw new Error(text);
+  }
+}
 
 export const createUser = async (email, password) => {
   try {

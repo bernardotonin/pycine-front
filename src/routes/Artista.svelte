@@ -1,43 +1,76 @@
 <script>
-  import { AccordionItem, Accordion } from 'flowbite-svelte';
-let data = [{
-  "biography": "Arnold Alois Schwarzenegger (born July 30, 1947) is an Austrian-American actor, film producer, businessman, former bodybuilder and politician who served as the 38th governor of California (2003-2011). As of 2022, he is the most recent Republican governor of California. Time magazine named Schwarzenegger one of the 100 most influential people in the world in 2004 and 2007. He also served as ...",
-  "birthday": "1947-07-30",
-  "gender": 2,
-  "id": 1100,
-  "known_for_department": "Acting",
-  "name": "Arnold Schwarzenegger",
-  "place_of_birth": "Thal, Styria, Austria",
-  "popularity": 26.296,
-  "profile_path": "/zEMhugsgXIpnQqO31GpAJYMUZZ1.jpg"
-},{
-  "biography": "Arnold Alois Schwarzenegger (born July 30, 1947) is an Austrian-American actor, film producer, businessman, former bodybuilder and politician who served as the 38th governor of California (2003-2011). As of 2022, he is the most recent Republican governor of California. Time magazine named Schwarzenegger one of the 100 most influential people in the world in 2004 and 2007. He also served as ...",
-  "birthday": "1947-07-30",
-  "gender": 2,
-  "id": 1100,
-  "known_for_department": "Acting",
-  "name": "Arnold Schwarzenegger",
-  "place_of_birth": "Thal, Styria, Austria",
-  "popularity": 26.296,
-  "profile_path": "/zEMhugsgXIpnQqO31GpAJYMUZZ1.jpg"
-},
-{
-  "biography": "Arnold Alois Schwarzenegger (born July 30, 1947) is an Austrian-American actor, film producer, businessman, former bodybuilder and politician who served as the 38th governor of California (2003-2011). As of 2022, he is the most recent Republican governor of California. Time magazine named Schwarzenegger one of the 100 most influential people in the world in 2004 and 2007. He also served as ...",
-  "birthday": "1947-07-30",
-  "gender": 2,
-  "id": 1100,
-  "known_for_department": "Acting",
-  "name": "Arnold Schwarzenegger",
-  "place_of_birth": "Thal, Styria, Austria",
-  "popularity": 26.296,
-  "profile_path": "/zEMhugsgXIpnQqO31GpAJYMUZZ1.jpg"
-}];
+  import { Input, Label, Button, Heading, Accordion, AccordionItem, P, Li, List, Spinner} from "flowbite-svelte";
+  import { SearchOutline } from "flowbite-svelte-icons"
+  import { getActor } from "../util/APIService";
+
+  let promise = null;
+
+  const formHandler = async (e) => {
+    const data = new FormData(e.target);
+    const number = data.get("actorid");
+
+    promise = getActor(number);
+  }
 </script>
-<Accordion>
-{#each data as artista}
-  <AccordionItem>
-    <span slot="header">{artista.name}</span>
-    <p class="mb-2 text-gray-500 dark:text-gray-400">{artista.biography}</p>
-  </AccordionItem>
-{/each}
-</Accordion>
+
+<Heading class='text-center mb-3'>Actor search</Heading>
+
+<form class="searchActorId" on:submit|preventDefault={formHandler}>
+  <div class="inputContainer">
+      <Label for="actorid" class="block mb-4">Email</Label>
+      <Input required id="actorid" name="actorid" size="lg"  type="number" placeholder="Enter the actor id">
+          <SearchOutline slot="left" class="w-5 h-5 text-gray-500 dark:text-gray-400" />
+      </Input>
+  </div>
+  <Button class='mt-5 mb-3' type='submit'>Search</Button>
+</form>
+
+{#if promise}
+
+{#await promise}
+    <div class="spinner">
+        <Spinner size={24}/>
+
+    </div>
+  {:then actor} 
+
+  <div class="actorContainer">
+    <Accordion>
+      <AccordionItem>
+        <span slot="header">{actor.name}</span>
+        <P>{actor.bio}</P>
+        <List>
+          <Li>Birthday: {actor.birthday}</Li>
+          <Li>Place of birth: {actor.placeofbirth}</Li>
+          <Li>Known for: {actor.known_for}</Li>
+        </List>
+      </AccordionItem>
+    </Accordion>
+  </div>
+
+
+{/await}
+{/if}
+
+<style>
+  .searchActorId{
+    width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px;
+    border-width: 1px;
+    border-color: #EB4F27;
+    border-radius: 10px;
+  }
+  .spinner{
+        position: absolute;
+        left: 1200px;
+        top: 400px
+  }
+
+  .actorContainer{
+    width: 500px;
+    margin: 20px auto;
+  }
+  
+</style>

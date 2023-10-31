@@ -26,6 +26,7 @@ This application was developed using javascript and uses the following libraries
 
 - **[TailwindCSS](https://pipenv.pypa.io/en/latest/):** A utility-first CSS framework packed with classes like `flex`, `pt-4`, `text-center` and `rotate-90` that can be composed to build any design, directly in your markup.
 - **[Vite](https://pipenv.pypa.io/en/latest/):** Vite is a build tool that aims to provide a faster and leaner development experience for modern web projects.
+- **[Axios](https://axios-http.com/):** Axios is a simple promise based HTTP client for the browser and node.js. 
 
 ## Instalation and Usage
 

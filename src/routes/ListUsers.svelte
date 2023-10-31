@@ -14,13 +14,14 @@
         <Spinner size={24}/>
 
     </div>
-  {:then users} 
+  {:then users}
+  <div class="table">
+
   <Table>
     <TableHead>
       <TableHeadCell>ID</TableHeadCell>
       <TableHeadCell>Email</TableHeadCell>
       <TableHeadCell>Password</TableHeadCell>
-      <TableHeadCell>Favorites</TableHeadCell>
       <TableHeadCell>⌘</TableHeadCell>
     </TableHead>
     <TableBody class="divide-y">
@@ -29,21 +30,19 @@
             <TableBodyCell>{user.id}</TableBodyCell>
             <TableBodyCell>{user.email}</TableBodyCell>
             <TableBodyCell>{user.password}</TableBodyCell>
-            <TableBodyCell>
-            <List>
-            {#each user.favorites as favorite}
-                <Li>{favorite.title}</Li>
-            {/each}
-            </List>
-            </TableBodyCell>
-            <TableBodyCell><Button color='red' on:click={async ()=>{deleteUser(user.id); await setTimeout(()=>{promise = getUsers()}, "200")}}>Delete</Button></TableBodyCell>
+            <TableBodyCell><Button color='red' on:click={async ()=>{deleteUser(user.id); await setTimeout(()=>{promise = getUsers()}, "500")}}>Delete</Button></TableBodyCell>
         </TableBodyRow>
         {/each}
     </TableBody>
   </Table>
+</div>
+
   {/await}
 
 <style>
+    .table{
+      margin: 0 auto;
+    }
     .spinner{
         position: absolute;
         left: 900px;

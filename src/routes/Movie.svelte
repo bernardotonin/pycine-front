@@ -26,7 +26,7 @@
 		  	
 		  <div class="align">
 		  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{filme.title}</h5>
-		  <Button on:click={() => {addFavorite(2, filme.title, filme.description, filme.image)}}>
+		  <Button on:click={() => {addFavorite(1, filme.title, filme.description, filme.image)}}>
 			Favorito
 			<HeartOutline class="w-3.5 h-3.5 ml-2 text-white" />
 		  </Button>

@@ -20,6 +20,17 @@ export const getUsers = async () => {
   }
 }
 
+export const getUserById = async (user_id) => {
+  const res = await fetch(`http://localhost:8080/user/list/${user_id}`);
+  const text = await res.json();
+  if (res.ok) {
+    return text;
+  } else {
+    throw new Error(text);
+  }
+}
+
+
 export const getActor = async (actor_id) => {
   const res = await fetch(`http://localhost:8080/movie/actor/${actor_id}`);
   const text = await res.json();
@@ -60,6 +71,15 @@ export const addFavorite = async (user_id, title, description, bannerUrl) => {
     "bannerUrl": String(bannerUrl)
   })
     return 'Favorite Added';
+  } catch (error) {
+    return error;
+  }
+}
+
+export const removeFavorite = async (user_id, title) => {
+  try {
+    const response = await axios.delete(`http://localhost:8080/user/favorite/remove/${user_id}?title=${title}`)
+    return 'Favorite Removed';
   } catch (error) {
     return error;
   }

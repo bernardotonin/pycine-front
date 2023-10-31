@@ -15,5 +15,6 @@
     <NavLi href="/" on:click={()=> menu=2 }>Artist</NavLi>
     <NavLi href="/" on:click={()=> menu=3 }>Users</NavLi>
     <NavLi href="/" on:click={()=> menu=4 }>List Users</NavLi>
+    <NavLi href="/" on:click={()=> menu=5 }>List Favorites</NavLi>
   </NavUl>
 </Navbar>

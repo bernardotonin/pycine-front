@@ -64,7 +64,7 @@
   }
   .spinner{
         position: absolute;
-        left: 1200px;
+        left: 900px;
         top: 400px
   }
 

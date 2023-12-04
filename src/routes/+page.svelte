@@ -6,6 +6,7 @@
 	import User from "./User.svelte"
 	import ListUsers from "./ListUsers.svelte";
   	import Favorites from "./Favorites.svelte";
+  	import ArtistByName from "./ArtistByName.svelte";
 </script>
 
 <Nav bind:menu/>
@@ -16,10 +17,12 @@
 	{:else if menu === 2}
 		<Artista/>
 	{:else if menu === 3}
-		<User/>
+		<ArtistByName/>
 	{:else if menu === 4}
+		<User/>
+	{:else if menu === 5}
 		<ListUsers/>
-	{:else}
-		<Favorites/>
+	{:else if menu === 6}
+		<Favorites/>	
 	{/if}
 </div>

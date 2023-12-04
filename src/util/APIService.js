@@ -30,6 +30,16 @@ export const getUserById = async (user_id) => {
   }
 }
 
+export const getActorByName = async (name) => {
+  const res = await fetch(`http://localhost:8080/movie/actor?query=${name}`);
+  const text = await res.json();
+  if (res.ok) {
+    return text;
+  } else {
+    throw new Error(text);
+  }
+}
+
 
 export const getActor = async (actor_id) => {
   const res = await fetch(`http://localhost:8080/movie/actor/${actor_id}`);
@@ -62,13 +72,14 @@ export const deleteUser = async (id) => {
   }
 }
 
-export const addFavorite = async (user_id, title, description, bannerUrl) => {
+export const addFavorite = async (user_id, title, description, bannerUrl, tmdb_id) => {
   try {
     const response = await axios.post('http://localhost:8080/user/favorite/add', {
     "user_id": parseInt(user_id),
     "title": String(title),
     "description": String(description),
-    "bannerUrl": String(bannerUrl)
+    "bannerUrl": String(bannerUrl),
+    "tmdb_id": parseInt(tmdb_id)
   })
     return 'Favorite Added';
   } catch (error) {
@@ -79,6 +90,30 @@ export const addFavorite = async (user_id, title, description, bannerUrl) => {
 export const removeFavorite = async (user_id, title) => {
   try {
     const response = await axios.delete(`http://localhost:8080/user/favorite/remove/${user_id}?title=${title}`)
+    return 'Favorite Removed';
+  } catch (error) {
+    return error;
+  }
+}
+
+export const addFavoriteActor = async (user_id, name, bio, profileUrl, tmdb_actor_id) => {
+  try {
+    const response = await axios.post('http://localhost:8080/movie/actor/favorite/add', {
+    "user_id": parseInt(user_id),
+    "name": String(name),
+    "bio": String(bio),
+    "profileUrl": String(profileUrl),
+    "tmdb_actor_id": parseInt(tmdb_actor_id)
+  })
+    return 'Favorite Added';
+  } catch (error) {
+    return error;
+  }
+}
+
+export const removeFavoriteActor = async (user_id, name) => {
+  try {
+    const response = await axios.delete(`http://localhost:8080/movie/actor/favorite/remove/${user_id}?name=${name}`)
     return 'Favorite Removed';
   } catch (error) {
     return error;

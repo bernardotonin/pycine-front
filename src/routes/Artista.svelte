@@ -13,11 +13,11 @@
   }
 </script>
 
-<Heading class='text-center mb-3'>Actor search</Heading>
+<Heading class='text-center mb-3'>Actor search by id</Heading>
 
 <form class="searchActorId" on:submit|preventDefault={formHandler}>
   <div class="inputContainer">
-      <Label for="actorid" class="block mb-4">Email</Label>
+      <Label for="actorid" class="block mb-4">Enter actor id</Label>
       <Input required id="actorid" name="actorid" size="lg"  type="number" placeholder="Enter the actor id">
           <SearchOutline slot="left" class="w-5 h-5 text-gray-500 dark:text-gray-400" />
       </Input>
